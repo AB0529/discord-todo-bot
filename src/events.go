@@ -21,8 +21,8 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	// Create new context on each message1
-	msg := strings.Split(strings.ToLower(m.Message.Content)[1:], " ")
+	// Create new context on each message
+	msg := strings.Split(strings.ToLower(m.Message.Content)[len(Config.Prefix):], " ")
 
 	if len(msg) <= 0 {
 		// Send message to LastMessage channel
@@ -37,8 +37,9 @@ func MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		go func() { LastMessage <- m.Message }()
 		return
 	}
+
 	// Make sure message starts with prefix
-	if string(m.Message.Content[0]) != Config.Prefix {
+	if strings.Split(m.Message.Content, " ")[0][:len(Config.Prefix)] != Config.Prefix {
 		return
 	}
 	ctx := &Context{

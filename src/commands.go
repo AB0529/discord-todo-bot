@@ -10,7 +10,7 @@ func Ping(ctx *Context) {
 	m := ctx.NewEmbed("Pinging....")
 	ts, _ := m.Timestamp.Parse()
 	now := time.Now()
-	ctx.EditEmbed(m, fmt.Sprintf("🏓 | **Pong my ping**\n\n💗 | **Heartbeat**: `%1.fms`\n ⏱️| **Message Delay**: `%1.fms`",
+	ctx.EditEmbed(m, fmt.Sprintf("🏓 | **Ping my mom**\n\n💗 | **Heartbeat**: `%1.fms`\n ⏱️| **Message Delay**: `%1.fms`",
 		float64(ctx.Session.HeartbeatLatency().Milliseconds()),
 		float64(now.Sub(ts).Milliseconds())))
 }
