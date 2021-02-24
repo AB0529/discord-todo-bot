@@ -39,6 +39,14 @@ func main() {
 			Handler: Test,
 			Flags: []*Flag{ { Name: "add", RequiresValue: true }, { Name: "list" } },
 		},
+		{
+			Name:    "todo",
+			Aliases: []string{"td" },
+			Example: []string{Config.Prefix + "todo <flag> <value>", Config.Prefix + "todo add Do dishes at 3:14pm"},
+			Desc:    []string{"Controls the user's todo list", "Flag 'add': adds an item to your list", "Flag 'list': lists your list", "Flag 'remove': removes an item to your list"},
+			Handler: Todo,
+			Flags: []*Flag{ { Name: "add", RequiresValue: true }, { Name: "list" }, { Name: "li" }, { Name: "remove" }, { Name: "rm" } },
+		},
 	})
 
 	// Open a websocket connection to Discord and begin listening.

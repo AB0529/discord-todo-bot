@@ -50,12 +50,11 @@ type MessageCollector struct {
 	Done chan bool
 }
 
-// DBShow the show in the database
-type DBShow struct{
-	MalID int
-	Title string
-	ImageURL string
-	AlreadySent bool
+// ListItem item in todo list
+type ListItem struct {
+	Name string
+	Time time.Time
 }
+
 // Database the users database
-type Database map[string][]*DBShow
+type Database map[string][]*ListItem

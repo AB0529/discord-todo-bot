@@ -11,6 +11,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 var (
@@ -236,4 +237,22 @@ func (db *Database) Write() {
 	Die(err)
 	err = ioutil.WriteFile("../users.yml", d, 0777)
 	Die(err)
+}
+
+// GetTimeFromArgs will return a time object if it can parse from the args
+func GetTimeFromArgs(args string, now time.Time) (time.Time, error) {
+	timeArr := strings.Split(args, ":")
+	if len(timeArr) <= 1 {
+		return time.Time{}, errors.New("could not parse time")
+	}
+	timeParsed, err := time.Parse("01/02/2006 3:04pm",
+		fmt.Sprintf("%s %s:%s",
+			now.Format("01/02/2006"),
+			timeArr[0],
+			timeArr[1]))
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return timeParsed, nil
 }
